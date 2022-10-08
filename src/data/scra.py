@@ -1,6 +1,6 @@
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
-
+import pandas as pd
 
 s = HTMLSession()
 
@@ -40,5 +40,8 @@ def getdetails(soup):
         details.append(items)
     return details
 data = getdata(url)
-url = getdetails(data)
-print(url)
+alldetails = getdetails(data)
+df = pd.DataFrame(alldetails)
+df.to_excel('data\processed\camera.xlsx', index=False)
+
+#https://www.amazon.co.uk/s?k=dslr+camera&ref=sr_pg_1
