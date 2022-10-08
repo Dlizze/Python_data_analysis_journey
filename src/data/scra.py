@@ -25,6 +25,20 @@ def getprices(soup):
     for price in soup.find_all('span', attrs={'class': 'a-price'}):
         prices.append(price.find(class_='a-offscreen').text)
     return prices
+
+def getdetails(soup):
+    details = []
+    for detail in soup.find_all('div', attrs={'class': 's-result-item s-asin sg-col-0-of-12 sg-col-16-of-20 sg-col s-widget-spacing-small sg-col-12-of-16'}):
+        items = {
+            'name': detail.find('span', attrs={'class': 'a-size-medium a-color-base a-text-normal'}).text
+        }
+        try:
+            items['price'] = detail.find(class_='a-offscreen').text
+        except:
+            items['price'] = ''
+            
+        details.append(items)
+    return details
 data = getdata(url)
-url = getprices(data)
+url = getdetails(data)
 print(url)
