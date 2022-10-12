@@ -43,5 +43,3 @@ data = getdata(url)
 alldetails = getdetails(data)
 df = pd.DataFrame(alldetails)
 df.to_excel('data\processed\camera.xlsx', index=False)
-
-#https://www.amazon.co.uk/s?k=dslr+camera&ref=sr_pg_1
