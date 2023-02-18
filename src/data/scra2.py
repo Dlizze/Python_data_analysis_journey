@@ -9,7 +9,7 @@ headers = {
 }
 
 
-search_query = 'dslr_cameras'.replace(' ', '+')
+search_query = 'office_chair'.replace(' ', '+')
 base_url = 'https://www.amazon.co.uk/s?k={0}'.format(search_query)
 
 items = []
@@ -26,10 +26,12 @@ for i in range(1, 5):
 
         try:
             rating = result.find('i', {'class': 'a-icon'}).text
-            rating_count = result.find_all('span', {'aria-label': True})[1].text
         except AttributeError:
             continue
-
+        try:
+            rating_count = result.find_all('span', {'aria-label': True})[1].text
+        except IndexError:
+            rating_count = result.find_all('span', {'aria-label': True})[0].text
         try:
             price1 = result.find('span', {'class': 'a-offscreen'}).text.replace('£','').replace(',','').replace('$','')
             #price2 = result.find('span', {'class': 'a-price-fraction'}).text
